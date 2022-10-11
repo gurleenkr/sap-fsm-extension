@@ -1,3 +1,3 @@
-# SAP FSM Extension
+# SAP FSM Weather Extension
 
 Work in Progress
