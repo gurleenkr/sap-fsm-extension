@@ -1,0 +1,7 @@
+{
+    "name": "Weather Service",
+    "provider": "SAP FSM",
+    "description": "As a dispatcher, it enables you to see the weather according to the start date and time of the activity",   
+    "version": "1.0.0", 
+    "icon": "https://raw.githubusercontent.com/gurleenkr/sap-fsm-extension/main/weather_icon.png"
+}
