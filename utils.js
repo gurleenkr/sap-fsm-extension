@@ -1,8 +1,28 @@
 // 
 // Update html dom with provided string value
 //
-const updateUI = (text) =>
+const updateTitle = (text) =>
   (document.querySelectorAll('#info')[0].innerText = text);
+
+// 
+// Display Weather Information
+//
+function updateUI(response) {
+  if (!response) {
+    return;
+  }
+
+  var hourly = response.hourly;
+  var units = response.hourly_units;
+
+  (document.querySelector('#lat').innerText = response.latitude);
+  (document.querySelector('#long').innerText = response.longitude);
+  (document.querySelector('#time').innerText = hourly.time[0] + " " + response.timezone_abbreviation);
+  (document.querySelector('#temp').innerText = hourly.temperature_2m[0] + units.temperature_2m);
+  (document.querySelector('#rel-hum').innerText = hourly.relativehumidity_2m[0] + units.relativehumidity_2m);
+  (document.querySelector('#wind').innerText = hourly.windspeed_10m[0] + units.windspeed_10m);
+
+}
 
 //
 // Loop before a token expire to fetch a new one
@@ -25,13 +45,13 @@ function initializeRefreshTokenStrategy(shellSdk, auth) {
 }
 
 // 
-// Request context with activity ID to return serviceContract assigned
+// Request context with activity ID to return weather of the earliestStartDateTime assigned
 //
-function getServiceContract(cloudHost, account, company, activity_id) {
-  
+function getWeather(cloudHost, account, company, activity_id) {
+
   const headers = {
     'Content-Type': 'application/json',
-    'X-Client-ID': 'fsm-extension-sample',
+    'X-Client-ID': 'sap-fsm-extension',
     'X-Client-Version': '1.0.0',
     'Authorization': `bearer ${sessionStorage.getItem('token')}`,
   };
@@ -41,36 +61,33 @@ function getServiceContract(cloudHost, account, company, activity_id) {
     // Fetch Activity object
     fetch(`https://${cloudHost}/api/data/v4/Activity/${activity_id}?dtos=Activity.42&account=${account}&company=${company}`, {
       headers
-      })
-        .then(response => response.json())
-        .then(function(json) {
+    })
+      .then(response => response.json())
+      .then(function (json) {
 
-          console.log(json)
+        console.log(json)
 
-          // const activity = json.data[0].activity;
-          // // Fetch all ServiceContractEquipment
-          // fetch(`https://${cloudHost}/api/data/v4/ServiceContractEquipment?dtos=ServiceContractEquipment.12&account=${account}&company=${company}`, {
-          //   headers
-          //   })
-          //     .then(response => response.json())
-          //     .then(function(json) {
+        const activity = json.data[0].activity;
 
-          //       const serviceContractEquipment = json.data.find(contract => contract.serviceContractEquipment.equipment === activity.equipment);
-          //       if (!serviceContractEquipment) {
-          //         resolve(null);
-          //       } else {
-          //         fetch(`https://${cloudHost}/api/data/v4/ServiceContract/${serviceContractEquipment.serviceContractEquipment.serviceContract}?dtos=ServiceContract.13&account=${account}&company=${company}`, {
-          //           headers
-          //           })
-          //             .then(response => response.json())
-          //             .then(function(json) {
-          //               resolve(json.data[0].serviceContract);
-          //             });
-              //   }
+        // Fetch Weather API
+        // var start_date = activity.earliestStartDateTime;
+        var start_date = "2022-10-12";
 
-              // });
+        var date = new Date();
+        console.log(date.toString());
+        var end_date = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split("T")[0];
+        console.log(end_date);
 
-        });
+        fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relativehumidity_2m,windspeed_10m&current_weather=true&start_date=${start_date}&end_date=${end_date}`, {
+          headers
+        })
+          .then(response => response.json())
+          .then(function (json) {
+            // console.log(json)
+            resolve(json);
+          });
+
+      });
 
   });
 }

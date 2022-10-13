@@ -11,18 +11,26 @@
 <body>
   <div>
     <h2 class="fd-title fd-title--h2" id="info">No selected activities</h2>
+
+    <h3 class="fd-title fd-title--h3">Latitude: <div id="lat"></div></h3>
+    <h3 class="fd-title fd-title--h3">Longitude: <div id="long"></div></h3>
+    <h3 class="fd-title fd-title--h3">DateTime: <div id="time"></div></h3>
+    <h3 class="fd-title fd-title--h3">Temperature: <div id="temp"></div></h3>
+    <h3 class="fd-title fd-title--h3">Relative Humidity: <div id="rel-hum"></div></h3>
+    <h3 class="fd-title fd-title--h3">Wind Speed: <div id="wind"></div></h3>
+
   </div>
   <script src="https://unpkg.com/fsm-shell"></script>
   <script src="utils.js"></script>
   <script>
-    
+
     // Import ShellSDK and events list from FSMShell global variable
     // see https://github.com/SAP/fsm-shell for more details.
     const { ShellSdk, SHELL_EVENTS } = FSMShell;
 
     // Display an error message if extension does not run within shell
     if (!ShellSdk.isInsideShell()) {
-      updateUI('Unable to reach shell eventAPI');
+      updateTitle('Unable to reach shell eventAPI');
     } else {
       // Initialise ShellSDK to connect with parent shell library
       const shellSdk = ShellSdk.init(parent, '*');
@@ -59,11 +67,9 @@
         // Add a listenner expecting activityID
         shellSdk.onViewState('activityID', async activityID => {
 
-          updateUI(`Loading ...`);
+          let response = await getWeather(cloudHost, account, company, activityID);
 
-          let serviceContract = await getServiceContract(cloudHost, account, company, activityID);
-
-          updateUI(serviceContract ? `${serviceContract.contractType}` : `NO CONTRACT`);
+          updateUI(response);
         });
       });
     }
