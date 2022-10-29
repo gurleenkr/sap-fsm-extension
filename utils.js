@@ -70,20 +70,21 @@ function getWeather(cloudHost, account, company, activity_id) {
         const activity = json.data[0].activity;
 
         // Fetch Weather API
-        // var start_date = activity.earliestStartDateTime;
-        var start_date = "2022-10-12";
+        var start_date = activity.earliestStartDateTime;
+        console.log(start_date);
+        start_date = start_date.split("T")[0];
+        console.log(start_date);
 
         var date = new Date();
-        console.log(date.toString());
         var end_date = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split("T")[0];
         console.log(end_date);
 
-        fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relativehumidity_2m,windspeed_10m&current_weather=true&start_date=${start_date}&end_date=${end_date}`, {
+        fetch(`https://cors-anywhere.herokuapp.com/https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relativehumidity_2m,windspeed_10m&current_weather=true&start_date=${start_date}&end_date=${end_date}`, {
           headers
         })
           .then(response => response.json())
           .then(function (json) {
-            // console.log(json)
+            console.log(json)
             resolve(json);
           });
 
