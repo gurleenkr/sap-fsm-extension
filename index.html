@@ -69,6 +69,7 @@
 
           let response = await getWeather(cloudHost, account, company, activityID);
 
+          updateTitle('Weather Information of the Selected Activity');
           updateUI(response);
         });
       });
