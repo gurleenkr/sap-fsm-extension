@@ -10,11 +10,12 @@
 
 <body>
   <div>
-    <h2 class="fd-title fd-title--h2" id="info">No selected activities</h2>
+    <h1 class="fd-title fd-title--h1" id="info">No selected activities</h1>
 
     <h3 class="fd-title fd-title--h3">Latitude: <div id="lat"></div></h3>
     <h3 class="fd-title fd-title--h3">Longitude: <div id="long"></div></h3>
-    <h3 class="fd-title fd-title--h3">DateTime: <div id="time"></div></h3>
+    <h3 class="fd-title fd-title--h3">Date & Time: <div id="time"></div></h3>
+    <h3 class="fd-title fd-title--h3">Weather Code: <div id="code"></div></h3>
     <h3 class="fd-title fd-title--h3">Temperature: <div id="temp"></div></h3>
     <h3 class="fd-title fd-title--h3">Relative Humidity: <div id="rel-hum"></div></h3>
     <h3 class="fd-title fd-title--h3">Wind Speed: <div id="wind"></div></h3>
@@ -69,7 +70,7 @@
 
           let response = await getWeather(cloudHost, account, company, activityID);
 
-          updateTitle('Weather Information of the Selected Activity');
+          updateTitle('New Delhi');
           updateUI(response);
         });
       });

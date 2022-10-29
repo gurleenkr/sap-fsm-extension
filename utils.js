@@ -18,10 +18,11 @@ function updateUI(response) {
   (document.querySelector('#lat').innerText = response.latitude);
   (document.querySelector('#long').innerText = response.longitude);
   (document.querySelector('#time').innerText = hourly.time[0] + " " + response.timezone_abbreviation);
+  (document.querySelector('#code').innerText = hourly.weathercode[0]);
   (document.querySelector('#temp').innerText = hourly.temperature_2m[0] + units.temperature_2m);
   (document.querySelector('#rel-hum').innerText = hourly.relativehumidity_2m[0] + units.relativehumidity_2m);
   (document.querySelector('#wind').innerText = hourly.windspeed_10m[0] + units.windspeed_10m);
-
+  
 }
 
 //
@@ -79,7 +80,7 @@ function getWeather(cloudHost, account, company, activity_id) {
         var end_date = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split("T")[0];
         console.log(end_date);
 
-        fetch(`https://cors-anywhere.herokuapp.com/https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relativehumidity_2m,windspeed_10m&current_weather=true&start_date=${start_date}&end_date=${end_date}`, {
+        fetch(`https://cors-anywhere.herokuapp.com/https://api.open-meteo.com/v1/forecast?latitude=28.6353&longitude=77.2250&hourly=temperature_2m,relativehumidity_2m,windspeed_10m,weathercode&current_weather=true&start_date=${start_date}&end_date=${end_date}`, {
           headers
         })
           .then(response => response.json())
