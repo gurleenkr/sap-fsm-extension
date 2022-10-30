@@ -4,15 +4,15 @@ Weather Service extension is a front-end extension used to display the weather a
 
 ### Default Case
 
-When no activity is selected, then the weather of the current date is displayed. A warning of the same is displayed in the footer.
+When no activity is selected, the weather of the current date is displayed. A warning of the same is displayed in the footer.
 
 ## Services Used
 
-SAP FSM Shell SDK
-Data Model Activity DTO v42
-Weather API
+SAP FSM Shell SDK <br/>
+Data Model Activity DTO v42 <br/>
+Weather API <br/>
 Tailwind CSS
 
 ## Roadblock
 
-CORS error came while trying to access Weather API on SAP FSM. So to bypass the CORS Policy, CORS Anywhere was used. CORS Anywhere is a NodeJS reverse proxy which adds CORS headers to the proxied request.
+CORS error came while trying to access Weather API on SAP FSM. So to bypass the CORS Policy, CORS Anywhere was used. It is a NodeJS reverse proxy which adds CORS headers to the proxied request.
