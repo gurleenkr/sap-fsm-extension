@@ -5,7 +5,7 @@ const updateTitle = (text) =>
   (document.querySelectorAll('#info')[0].innerText = text);
 
 //
-// Update warning when activity is selected
+// Update warning
 //
 const updateWarning = (text) =>
   (document.querySelectorAll('#warning')[0].innerText = text);
@@ -76,7 +76,7 @@ function getDefaultWeather() {
 
   return new Promise(resolve => {
 
-    // Fetch Weather API with today's date
+    // Fetch Weather API with the current date
     var date = new Date();
     var start_date = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split("T")[0];
     console.log(start_date);
