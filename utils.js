@@ -34,8 +34,6 @@ function updateUI(response) {
   console.log(weatherDesc);
   console.log(weatherIcon);
 
-  (document.querySelector('#lat').innerText = response.latitude);
-  (document.querySelector('#long').innerText = response.longitude);
   (document.querySelector('#time').innerText = dateTime);
   (document.querySelector('#desc').innerText = weatherDesc);
   (document.querySelector('#icon').src = weatherIcon);
