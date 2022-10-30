@@ -26,11 +26,17 @@ function updateUI(response) {
   dateTime = dateTime.split("(")[0];
   console.log(dateTime);
 
+  var weatherInfo = getWeatherDetails();
+  var weatherCode = parseInt(hourly.weathercode[0]);
+  console.log(weatherCode);
+  var weatherDesc = weatherInfo.weatherCode.description;
+  var weatherIcon = weatherInfo.weatherCode.icon;
+
   (document.querySelector('#lat').innerText = response.latitude);
   (document.querySelector('#long').innerText = response.longitude);
-  // (document.querySelector('#time').innerText = hourly.time[0] + " " + response.timezone_abbreviation);
   (document.querySelector('#time').innerText = dateTime);
-  (document.querySelector('#code').innerText = hourly.weathercode[0]);
+  (document.querySelector('#desc').innerText = weatherDesc);
+  (document.querySelector('#icon').src = weatherIcon);
   (document.querySelector('#temp').innerText = hourly.temperature_2m[0] + units.temperature_2m);
   (document.querySelector('#rel-hum').innerText = hourly.relativehumidity_2m[0] + units.relativehumidity_2m);
   (document.querySelector('#wind').innerText = hourly.windspeed_10m[0] + units.windspeed_10m);
@@ -104,4 +110,128 @@ function getWeather(cloudHost, account, company, activity_id) {
       });
 
   });
+}
+
+// 
+// Weather interpretation codes JSON
+//
+function getWeatherDetails() {
+  var json = {
+    "weather": {
+      0: {
+        "description": "Clear Sky",
+        "icon": "./weather_code_icons/clear_sky.png"
+      },
+      1: {
+        "description": "Mainly Clear",
+        "icon": "./weather_code_icons/cloudy.png"
+      },
+      2: {
+        "description": "Partly Cloudy",
+        "icon": "./weather_code_icons/cloudy.png"
+      },
+      3: {
+        "description": "Overcast",
+        "icon": "./weather_code_icons/cloudy.png"
+      },
+      45: {
+        "description": "Fog",
+        "icon": "./weather_code_icons/foggy.png"
+      },
+      48: {
+        "description": "Depositing Rime Fog",
+        "icon": "./weather_code_icons/foggy.png"
+      },
+      51: {
+        "description": "Light Drizzle",
+        "icon": "./weather_code_icons/drizzle.png"
+      },
+      53: {
+        "description": "Moderate Drizzle",
+        "icon": "./weather_code_icons/drizzle.png"
+      },
+      55: {
+        "description": "Dense Drizzle",
+        "icon": "./weather_code_icons/drizzle.png"
+      },
+      56: {
+        "description": "Light Freezing Drizzle",
+        "icon": "./weather_code_icons/freezing_drizzle_rain.png"
+      },
+      57: {
+        "description": "Dense Freezing Drizzle",
+        "icon": "./weather_code_icons/freezing_drizzle_rain.png"
+      },
+      61: {
+        "description": "Slight Rain",
+        "icon": "./weather_code_icons/rain.png"
+      },
+      63: {
+        "description": "Moderate Rain",
+        "icon": "./weather_code_icons/rain.png"
+      },
+      65: {
+        "description": "Heavy Rain",
+        "icon": "./weather_code_icons/rain.png"
+      },
+      66: {
+        "description": "Light Freezing Rain",
+        "icon": "./weather_code_icons/freezing_drizzle_rain.png"
+      },
+      67: {
+        "description": "Heavy Freezing Rain",
+        "icon": "./weather_code_icons/freezing_drizzle_rain.png"
+      },
+      71: {
+        "description": "Slight Snowfall",
+        "icon": "./weather_code_icons/snow_fall.png"
+      },
+      73: {
+        "description": "Moderate Snowfall",
+        "icon": "./weather_code_icons/snow_fall.png"
+      },
+      75: {
+        "description": "Heavy Snowfall",
+        "icon": "./weather_code_icons/snow_fall.png"
+      },
+      77: {
+        "description": "Snow Grains",
+        "icon": "./weather_code_icons/snow_grains.png"
+      },
+      80: {
+        "description": "Slight Rain Showers",
+        "icon": "./weather_code_icons/rain_showers.png"
+      },
+      81: {
+        "description": "Moderate Rain Showers",
+        "icon": "./weather_code_icons/rain_showers.png"
+      },
+      82: {
+        "description": "Violent Rain Showers",
+        "icon": "./weather_code_icons/rain_showers.png"
+      },
+      85: {
+        "description": "Slight Snow Showers",
+        "icon": "./weather_code_icons/snow_showers.png"
+      },
+      86: {
+        "description": "Heavy Snow Showers",
+        "icon": "./weather_code_icons/snow_showers.png"
+      },
+      95: {
+        "description": "Slight to Moderate Thunderstorm",
+        "icon": "./weather_code_icons/thunderstorm.png"
+      },
+      96: {
+        "description": "Thunderstorm with Slight Hail",
+        "icon": "./weather_code_icons/thunderstorm_hail.png"
+      },
+      99: {
+        "description": "Thunderstorm with Heavy Hail",
+        "icon": "./weather_code_icons/thunderstorm_hail.png"
+      }
+    }
+  }
+
+  return json;
 }

@@ -4,27 +4,48 @@
 <head>
   <meta charset="UTF-8" />
   <title>Weather Service</title>
-  <link href="https://unpkg.com/fundamental-styles" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   <link href="styles.css" rel="stylesheet">
 </head>
 
 <body>
-  <div>
-    <h1 class="fd-title fd-title--h1" id="info">No selected activities</h1>
 
-    <h3 class="fd-title fd-title--h3">Latitude: <div id="lat"></div></h3>
-    <h3 class="fd-title fd-title--h3">Longitude: <div id="long"></div></h3>
-    <h3 class="fd-title fd-title--h3">Date & Time: <div id="time"></div></h3>
-    <h3 class="fd-title fd-title--h3">Weather Code: <div id="code"></div></h3>
-    <h3 class="fd-title fd-title--h3">Temperature: <div id="temp"></div></h3>
-    <h3 class="fd-title fd-title--h3">Relative Humidity: <div id="rel-hum"></div></h3>
-    <h3 class="fd-title fd-title--h3">Wind Speed: <div id="wind"></div></h3>
+  <div
+    class="relative bg-sky-100 px-6 pt-8 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
+
+    <div class="text-slate-900 dark:text-slate-900" id="info">No selected activities</div>
+
+    <div class="text-gray-600 dark:text-gray-600 font-light text-xs" id="time"></div>
+
+    <div class="flex flex-row items-center my-6">
+      <div class="basis-1/4"><img src="./weather_code_icons/clear_sky.png" id="icon" class="w-16 h-16"></div>
+      <div class="basis-1/4">
+        <div class="flex flex-col">
+          <div class="basis-3/4 text-slate-900 dark:text-slate-900 font-normal text-3xl" id="temp"></div>
+          <div class="basis-1/4 text-zinc-700 dark:text-zinc-700 font-normal text-base" id="desc"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-row items-center mt-3">
+      <div class="basis-1/4"><img src="./weather_code_icons/humidity.png" class="relative w-8 h-8 ml-4"></div>
+      <div class="basis-1/4 text-slate-900 dark:text-slate-900 font-normal text-base" id="rel-hum"></div>
+    </div>
+
+    <div class="flex flex-row items-center mt-3">
+      <div class="basis-1/4"><img src="./weather_code_icons/windspeed.png" class="relative w-8 h-8 ml-4"></div>
+      <div class="basis-1/4 text-slate-900 dark:text-slate-900 font-normal text-base" id="wind"></div>
+    </div>
 
   </div>
+
   <script src="https://unpkg.com/fsm-shell"></script>
   <script src="utils.js"></script>
-  <script>
 
+  <script>
     // Import ShellSDK and events list from FSMShell global variable
     // see https://github.com/SAP/fsm-shell for more details.
     const { ShellSdk, SHELL_EVENTS } = FSMShell;
@@ -76,6 +97,7 @@
       });
     }
   </script>
+
 </body>
 
 </html>
