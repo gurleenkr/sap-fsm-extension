@@ -29,8 +29,8 @@ function updateUI(response) {
   var weatherInfo = getWeatherDetails();
   var weatherCode = parseInt(hourly.weathercode[0]);
   console.log(weatherCode);
-  var weatherDesc = weatherInfo.weatherCode.description;
-  var weatherIcon = weatherInfo.weatherCode.icon;
+  var weatherDesc = weatherInfo[weatherCode].description;
+  var weatherIcon = weatherInfo[weatherCode].icon;
 
   (document.querySelector('#lat').innerText = response.latitude);
   (document.querySelector('#long').innerText = response.longitude);
