@@ -15,4 +15,4 @@ Tailwind CSS
 
 ## Roadblock
 
-CORS error came while trying to access Weather API on SAP FSM. So to bypass the CORS Policy, CORS Anywhere was used. It is a NodeJS reverse proxy which adds CORS headers to the proxied request.
+CORS error came while trying to access Weather API on SAP FSM. So to bypass the CORS Policy, CORS Anywhere is used. It is a NodeJS reverse proxy which adds CORS headers to the proxied request.
