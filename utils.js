@@ -4,6 +4,12 @@
 const updateTitle = (text) =>
   (document.querySelectorAll('#info')[0].innerText = text);
 
+//
+// Update warning when activity is selected
+//
+const updateWarning = (text) =>
+  (document.querySelectorAll('#warning')[0].innerText = text);
+
 // 
 // Display Weather Information
 //
@@ -61,6 +67,31 @@ function initializeRefreshTokenStrategy(shellSdk, auth) {
 
   sessionStorage.setItem('token', auth.access_token);
   setTimeout(() => fetchToken(), (auth.expires_in * 1000) - 5000);
+}
+
+// 
+// Function to get default weather when no activity is selected
+//
+function getDefaultWeather() {
+
+  return new Promise(resolve => {
+
+    // Fetch Weather API with today's date
+    var date = new Date();
+    var start_date = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split("T")[0];
+    console.log(start_date);
+    var end_date = start_date;
+    console.log(end_date);
+
+    fetch(`https://cors-anywhere.herokuapp.com/https://api.open-meteo.com/v1/forecast?latitude=28.6353&longitude=77.2250&hourly=temperature_2m,relativehumidity_2m,windspeed_10m,weathercode&current_weather=true&start_date=${start_date}&end_date=${end_date}`)
+      .then(response => response.json())
+      .then(function (json) {
+        console.log(json)
+        resolve(json);
+      });
+
+  });
+
 }
 
 // 
