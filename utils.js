@@ -21,7 +21,10 @@ function updateUI(response) {
   console.log(dateTime);
   dateTime = new Date(dateTime);
   console.log(dateTime);
-  console.log(dateTime.toString());
+  dateTime = dateTime.toString();
+  console.log(dateTime);
+  dateTime = dateTime.split("(")[0];
+  console.log(dateTime);
 
   (document.querySelector('#lat').innerText = response.latitude);
   (document.querySelector('#long').innerText = response.longitude);
