@@ -15,14 +15,23 @@ function updateUI(response) {
   var hourly = response.hourly;
   var units = response.hourly_units;
 
+  var dateTime = hourly.time[0] + " " + response.timezone_abbreviation;
+  console.log(dateTime);
+  dateTime = dateTime.split("T")[0];
+  console.log(dateTime);
+  dateTime = new Date(dateTime);
+  console.log(dateTime);
+  console.log(dateTime.toString());
+
   (document.querySelector('#lat').innerText = response.latitude);
   (document.querySelector('#long').innerText = response.longitude);
-  (document.querySelector('#time').innerText = hourly.time[0] + " " + response.timezone_abbreviation);
+  // (document.querySelector('#time').innerText = hourly.time[0] + " " + response.timezone_abbreviation);
+  (document.querySelector('#time').innerText = dateTime);
   (document.querySelector('#code').innerText = hourly.weathercode[0]);
   (document.querySelector('#temp').innerText = hourly.temperature_2m[0] + units.temperature_2m);
   (document.querySelector('#rel-hum').innerText = hourly.relativehumidity_2m[0] + units.relativehumidity_2m);
   (document.querySelector('#wind').innerText = hourly.windspeed_10m[0] + units.windspeed_10m);
-  
+
 }
 
 //
